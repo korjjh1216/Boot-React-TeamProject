@@ -19,34 +19,5 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins ="*", allowedHeaders = "*")
 public class UserController {
     private final UserServiceImpl service;
-    
-    @PostMapping("")
-    public ResponseEntity<?> doJoin(@RequestBody User user) {
-    	System.out.println("doJoin()");
-    	service.save(user);
-    	return new ResponseEntity<>(HttpStatus.OK);
-    }
-    
-    @GetMapping("/list")
-    public ResponseEntity<?> UserList(){
-    	System.out.println("Get UserList()");
-    	return new ResponseEntity<>(service.findAll(),HttpStatus.OK);
-    }
-    
-    @PostMapping("/login")
-    public ResponseEntity<String> Userlogin(@RequestBody User user){
-    	System.out.println("get UserLogin()");
-    	System.out.println(user.getUsername() + ":" + user.getPassword());
-    	String userlogin = service.login(user.getUsername(), user.getPassword());
-    	    
-    	
-    	if(userlogin != null) {
-    		System.out.println("=== login success ===");
-    		return new ResponseEntity<>(HttpStatus.OK);	
-    	} else {
-    		System.out.println("=== login failed ===");
-    	}
-    	return new ResponseEntity<>(HttpStatus.FAILED_DEPENDENCY);
-    	
-    }
+
 }

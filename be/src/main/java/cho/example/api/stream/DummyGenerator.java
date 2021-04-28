@@ -38,14 +38,28 @@ public class DummyGenerator  {
         shuffle(fname);
         shuffle(name1);
         shuffle(name2);
-        return fname.get(0)+name1.get(0)+name2.get(0);
+        //return fname.get(0)+name1.get(0)+name2.get(0);
+        StringBuffer sb =new StringBuffer();
+        sb.append(fname.get(0));
+        sb.append(name1.get(0));
+        sb.append(name2.get(0));
+        return sb.toString();
     }
 
     public String makeUsername() {
         List<String> id = Arrays.asList("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(""));
         shuffle(id);
-        return id.get(0)+id.get(1)+id.get(2)+id.get(3);
-
+        //return id.get(0)+id.get(1)+id.get(2)+id.get(3);
+        id.subList(0,4);
+        StringBuffer sb = new StringBuffer();
+        for(int i=0;i<5;i++){
+            sb.append(id.get(i));
+        }
+        /*sb.insert(index,"<입력값>");
+        sb.replace(index,sb.length(),"<대체값>");
+        sb.delete(startindex,endindex);
+        sb.deleteCharAt(index);*/
+        return sb.toString();
     }
 
     public String makeEmail() {

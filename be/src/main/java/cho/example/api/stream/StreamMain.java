@@ -63,7 +63,7 @@ class Student implements Comparable<Student>{
 
     @Override
     public int compareTo(Student o) {
-        return 0;
+        return o.getScore()-this.getScore();
     }
 
 }
@@ -75,13 +75,14 @@ public class StreamMain {
         Scanner scanner = new Scanner(System.in);
 
         while (true){
-            System.out.println("메뉴: 0.EXIT 1.학년오름차순 2.성적내림차순 3.이름오름차순 4.ID오름차순");
+            System.out.println("메뉴: 0.EXIT 1.학년오름차순 2.성적내림차순 3.이름오름차순 4.ID오름차순 5.전학년내림차순");
             switch (scanner.nextInt()){
                 case 0: return;
                 case 1: ascGrade().forEach(System.out::println);break;
                 case 2: ascScore().forEach(System.out::println);break;
                 case 3: ascName().forEach(System.out::println);break;
                 case 4: ascId().forEach(System.out::println);break;
+                case 5: ascTotalScore().forEach(System.out::println);break;
             }
         }
 
@@ -90,11 +91,11 @@ public class StreamMain {
         DummyGenerator dum =new DummyGenerator();
         return
                 Stream.of(
-                        new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername()),
-                        new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername()),
-                        new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername()),
-                        new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername()),
-                        new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername())
+                        new Student(dum.MakeName(),rangeRandom.apply(1, 3),rangeRandom.apply(1, 100),dum.makeUsername()),
+                        new Student(dum.MakeName(),rangeRandom.apply(1, 3),rangeRandom.apply(1, 100),dum.makeUsername()),
+                        new Student(dum.MakeName(),rangeRandom.apply(1, 3),rangeRandom.apply(1, 100),dum.makeUsername()),
+                        new Student(dum.MakeName(),rangeRandom.apply(1, 3),rangeRandom.apply(1, 100),dum.makeUsername()),
+                        new Student(dum.MakeName(),rangeRandom.apply(1, 3),rangeRandom.apply(1, 100),dum.makeUsername())
                 );
     }
     public static Stream<Student> ascGrade() {
@@ -104,23 +105,28 @@ public class StreamMain {
 
     public static Stream<Student> ascName() {
         return makeStream().sorted(Comparator.comparing(Student::getName)
-                        .thenComparing(Comparator.naturalOrder()));
-    }
-
-    public static Stream<Student> ascScore() {
-        return makeStream().sorted(Comparator.comparing(Student::getScore).reversed());
-    }
-
-    public static Stream<Student> ascId(){
-        DummyGenerator dum =new DummyGenerator();
-        List<Student> myList =Arrays.asList(
-                new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername()),
-                new Student(dum.MakeName(),rangeRandom.apply(1, 10),rangeRandom.apply(1, 100),dum.makeUsername())
-        );
-       return makeStream().distinct().sorted(
-               Comparator.comparing(Student::getUsername)
                 .thenComparing(Comparator.naturalOrder()));
     }
 
+    //전학년 성적내림차순
+    public static Stream<Student> ascTotalScore() {
+        return makeStream().sorted(Comparator.naturalOrder());
+    }
 
+    public static Stream<Student> ascScore() {
+        //반별 내림 성적 내림차순
+        return makeStream().sorted(Comparator.comparing(Student::getGrade)
+                .thenComparing(Comparator.comparing(Student::getScore).reversed()));
+    }
+
+   /* public static Stream<Student> ascId(){
+       return makeStream()
+               .map(Student->{Student.setUsername(Student.getUsername().toLowerCase(Locale.ROOT));return Student;})
+               .distinct()
+               .sorted(Comparator.comparing(Student::getUsername));
+    }*/
+   public static Stream<Student> ascId(){
+       return makeStream()
+               .distinct()
+               .sorted(Comparator.comparing(Student::getUsername));}
 }
