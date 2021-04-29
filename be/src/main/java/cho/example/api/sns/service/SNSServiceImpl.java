@@ -19,7 +19,7 @@ public class SNSServiceImpl extends AbstractService<SNS> implements SNSService {
 
     @Override
     public Optional<SNS> findById(long id) {
-        return Optional.empty();
+        return repo.findById(id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SNSServiceImpl extends AbstractService<SNS> implements SNSService {
 
     @Override
     public Optional<SNS> getOne(long id) {
-        return Optional.empty();
+        return Optional.of(repo.getOne(id));
     }
 
     @Override
