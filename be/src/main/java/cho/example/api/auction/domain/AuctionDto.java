@@ -6,7 +6,7 @@ import java.util.List;
 
 import cho.example.api.chat.domain.Chat;
 import cho.example.api.stock.domain.Item;
-import cho.example.api.uss.domain.User;
+import cho.example.api.uss.domain.UserVo;
 
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,8 @@ public class AuctionDto implements Serializable {
     private String bidPrice;
     private String currentPrice;
     private String bid;
-    private List<User> userList;
-    private User user;
+    private List<UserVo> userVoList;
+    private UserVo userVo;
     private Item item;
     private Chat chat;
 }

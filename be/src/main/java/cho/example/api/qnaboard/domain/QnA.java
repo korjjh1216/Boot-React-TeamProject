@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import cho.example.api.uss.domain.UserVo;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -30,6 +31,8 @@ public class QnA {
     @Column(name = "reg_date")
     private Date regDate;
 
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name ="user_no")
+    UserVo user;
+
 }

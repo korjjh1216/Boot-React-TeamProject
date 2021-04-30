@@ -1,18 +1,15 @@
 package cho.example.api.uss.controller;
 
-import org.springframework.http.HttpStatus;
+import cho.example.api.news.domain.News;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import cho.example.api.uss.domain.User;
+import cho.example.api.uss.domain.UserVo;
 import cho.example.api.uss.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RestController @RequiredArgsConstructor
 @RequestMapping(value="/user")
@@ -20,4 +17,22 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
     private final UserServiceImpl service;
 
+    @PostMapping("")
+    public ResponseEntity<Long> join(@RequestBody UserVo user){
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<News>> fetch(@RequestBody UserVo user){
+        return ResponseEntity.ok(null);
+    }
+    @PutMapping("")
+    public ResponseEntity<List<News>> update(@RequestBody UserVo user){
+        return ResponseEntity.ok(null);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<List<News>> delete(@RequestBody UserVo user){
+        return ResponseEntity.ok(null);
+    }
 }

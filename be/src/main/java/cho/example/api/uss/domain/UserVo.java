@@ -1,15 +1,18 @@
 package cho.example.api.uss.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
+import cho.example.api.qnaboard.domain.QnA;
 import lombok.Data;
 
 @Data
 @Entity
 @Table( name = "users")
-public class User {
+public class UserVo {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="user_no")
@@ -40,7 +43,8 @@ public class User {
     
     @Column(name = "phone_number")
 	private String phoneNumber;
-    
-//    @OneToMany(mappedBy="user")
-//    private List<QnA> qnaList; 
+
+    @OneToMany(mappedBy = "user")
+	List<QnA> qna = new ArrayList<>();
+
 }

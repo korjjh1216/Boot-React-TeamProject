@@ -13,10 +13,7 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsId;
 
-    @Column(length = 20, nullable = false)
-    private String newsNo;
-
-    @Column(length = 20, nullable = false)
+    @Column(length = 20, nullable = true)
     private String category;
 
     @Column(length = 512, nullable = false)
@@ -26,9 +23,8 @@ public class News {
     private String address;
 
     @Builder
-    public News(String newsNo, String category,
+    public News(String category,
                 String title, String address) {
-        this.newsNo = newsNo;
         this.address = address;
         this.category = category;
         this.title = title;
