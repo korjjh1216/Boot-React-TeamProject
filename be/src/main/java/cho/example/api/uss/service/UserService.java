@@ -1,5 +1,8 @@
 package cho.example.api.uss.service;
 
+import cho.example.api.uss.domain.UserDto;
+
 public interface UserService {
-    public String login (String username, String password);
+
+    Long signup(UserDto user);
 }

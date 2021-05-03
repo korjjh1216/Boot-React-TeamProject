@@ -1,6 +1,9 @@
 package cho.example.api.uss.controller;
 
 import cho.example.api.news.domain.News;
+import cho.example.api.uss.domain.UserDto;
+import io.swagger.annotations.*;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,28 +14,54 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@RestController @RequiredArgsConstructor
-@RequestMapping(value="/user")
-@CrossOrigin(origins ="*", allowedHeaders = "*")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/users")
+@Api(tags = "users")
+@Log
 public class UserController {
     private final UserServiceImpl service;
 
-    @PostMapping("")
-    public ResponseEntity<Long> join(@RequestBody UserVo user){
-        return ResponseEntity.ok(null);
+    @PostMapping("/signup")
+    @ApiOperation(value = "${UserController.singin}")
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 403, message = "Access Denied"),
+            @ApiResponse(code = 422, message = "Username is already in use")})
+    public ResponseEntity<Long> signup(@ApiParam("signup User") @RequestBody UserDto user) {
+        return ResponseEntity.ok(service.signup(user));
     }
 
     @GetMapping("")
-    public ResponseEntity<List<News>> fetch(@RequestBody UserVo user){
+    public ResponseEntity<List<News>> fetch(@RequestBody UserVo user) {
         return ResponseEntity.ok(null);
     }
+
     @PutMapping("")
-    public ResponseEntity<List<News>> update(@RequestBody UserVo user){
+    public ResponseEntity<List<News>> update(@RequestBody UserVo user) {
         return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<List<News>> delete(@RequestBody UserVo user){
+    public ResponseEntity<List<News>> delete(@RequestBody UserVo user) {
+        return ResponseEntity.ok(null);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<?> all() {
+        log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/{username}}")
+    public ResponseEntity<?> auth(@PathVariable String username) {
+        log.info("로그인한 사용자 접근 가능한 URI");
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/admin")
+    public ResponseEntity<?> admin() {
+        log.info("관리자가 접근 가능한 URI");
         return ResponseEntity.ok(null);
     }
 }
