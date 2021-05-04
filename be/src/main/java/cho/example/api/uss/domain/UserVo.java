@@ -18,23 +18,13 @@ public class UserVo {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="user_no")
 	private long userNo;
-    
-   
-	@Column(unique = true ,nullable = false)
-	private String username;
 
-	@Size(min=8,message = "Minimum Password Length: 8characters")
-	private String password;
-	
-	@Column(name = "email")
-	private String email;
+	@Column(unique = true, nullable = false) private String username;
+	@Size(min=8, message = "Minimum Password Length: 8 characters") private String password;
+	@Column(unique = true, nullable = false) private String email;
+	@Column(unique = true, nullable = false) private String name;
+	@ElementCollection(fetch = FetchType.EAGER)
+	List<Role> roles;
 
-	@Column(name = "name")
-	private String name;
 
-    @OneToMany(mappedBy = "user")
-	List<QnA> qna = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    List<Role> roles;
 }

@@ -11,8 +11,9 @@ import lombok.Data;
 @Component 
 @Data
 public class UserDto implements Serializable {
+
 	@ApiModelProperty(position = 0)
-	private String userName;
+	private String username;
 	@ApiModelProperty(position = 1)
 	private String email;
 	@ApiModelProperty(position = 2)
@@ -21,6 +22,8 @@ public class UserDto implements Serializable {
 	private String name;
 
 	@ApiModelProperty(position = 4)
+	private String token;
+	@ApiModelProperty(position = 5)
 	private List<Role> roles;
 
 

@@ -27,6 +27,7 @@ dependencies {
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.2'
 
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'

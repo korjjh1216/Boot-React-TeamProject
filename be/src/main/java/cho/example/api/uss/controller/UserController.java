@@ -4,6 +4,7 @@ import cho.example.api.news.domain.News;
 import cho.example.api.uss.domain.UserDto;
 import io.swagger.annotations.*;
 import lombok.extern.java.Log;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +22,33 @@ import java.util.List;
 @Log
 public class UserController {
     private final UserServiceImpl service;
+    private final ModelMapper modelmapper;
 
     @PostMapping("/signup")
-    @ApiOperation(value = "${UserController.singin}")
-    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
+    @ApiOperation(value = "${UserController.signup}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 403, message = "Access Denied"),
             @ApiResponse(code = 422, message = "Username is already in use")})
-    public ResponseEntity<Long> signup(@ApiParam("signup User") @RequestBody UserDto user) {
-        return ResponseEntity.ok(service.signup(user));
+    public ResponseEntity<String> signup(@ApiParam("signup User") @RequestBody UserDto user) {
+
+        log.info("-----------------------------------------");
+        log.info(""+user);
+
+
+        return ResponseEntity.ok(service.signup(modelmapper.map(user,UserVo.class)));
     }
+
+    @PostMapping("/login")
+    @ApiOperation(value = "${UserController.login}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 422, message = "Invalid Username /Password supplied")})
+    public ResponseEntity<UserDto> login(@RequestBody UserDto user) {
+        return ResponseEntity.ok(service.login(modelmapper.map(user,UserVo.class)));
+    }
+
+
 
     @GetMapping("")
     public ResponseEntity<List<News>> fetch(@RequestBody UserVo user) {

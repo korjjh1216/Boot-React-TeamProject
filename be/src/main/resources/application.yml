@@ -10,3 +10,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+UserController:
+  signup: Creates user and returns its JWT token
+  login: Authenticates user and returns its JWT token
