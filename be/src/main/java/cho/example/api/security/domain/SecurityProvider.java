@@ -8,6 +8,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Log
 @Component
 @RequiredArgsConstructor
 public class SecurityProvider implements AuthenticationProvider {
@@ -56,7 +58,6 @@ public class SecurityProvider implements AuthenticationProvider {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth",roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority()))
                 .filter(Objects::nonNull).collect(Collectors.toList()));
-
         Date now = new Date();
         Date validity = new Date(now.getTime()+validityInMilliseconds);
 

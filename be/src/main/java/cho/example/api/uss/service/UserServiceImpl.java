@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService  {
         }
 
     }
+
+    @Override
+    public List<UserVo> findAll(UserVo user) {
+        return userRepo.findAll();
+    }
 }

@@ -45,6 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/users/signup").permitAll()
                 .antMatchers("/users/login").permitAll()
+
+                .antMatchers("/","h2-console/**").permitAll()
                 .anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/login");
         http.apply(new SecurityConfig(provider));

@@ -1,6 +1,5 @@
 package cho.example.api.uss.controller;
 
-import cho.example.api.news.domain.News;
 import cho.example.api.uss.domain.UserDto;
 import io.swagger.annotations.*;
 import lombok.extern.java.Log;
@@ -45,23 +44,24 @@ public class UserController {
             @ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 422, message = "Invalid Username /Password supplied")})
     public ResponseEntity<UserDto> login(@RequestBody UserDto user) {
+        log.info("+++유저+++" +user);
         return ResponseEntity.ok(service.login(modelmapper.map(user,UserVo.class)));
     }
 
 
 
-    @GetMapping("")
-    public ResponseEntity<List<News>> fetch(@RequestBody UserVo user) {
-        return ResponseEntity.ok(null);
+    @GetMapping("/fetch")
+    public ResponseEntity<List<UserVo>> fetch( UserVo user) {
+        return ResponseEntity.ok(service.findAll(user));
     }
 
     @PutMapping("")
-    public ResponseEntity<List<News>> update(@RequestBody UserVo user) {
+    public ResponseEntity<List<UserVo>> update(@RequestBody UserVo user) {
         return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<List<News>> delete(@RequestBody UserVo user) {
+    public ResponseEntity<List<UserVo>> delete(@RequestBody UserVo user) {
         return ResponseEntity.ok(null);
     }
 
