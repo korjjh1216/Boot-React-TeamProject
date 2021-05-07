@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/users")
 @Api(tags = "users")
 @Log
+@CrossOrigin(origins ="*", allowedHeaders = "*")
 public class UserController {
     private final UserServiceImpl service;
     private final ModelMapper modelmapper;
