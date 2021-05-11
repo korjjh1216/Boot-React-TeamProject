@@ -33,9 +33,6 @@ public class UserServiceImpl implements UserService  {
 
         log.info("2222=======================================");
         log.info(""+ user);
-
-
-
         if(!userRepo.existsByUsername(user.getUsername())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             List<Role> list = new ArrayList<>();
